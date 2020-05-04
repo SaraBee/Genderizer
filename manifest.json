@@ -2,9 +2,11 @@
 	"name": "Genderizer",
 	"version": "1.0",
 	"description": "Highlighting words since 2020",
-    "background": {
-        "scripts": ["background.js"],
-        "persistent": false
-    },
+    "content_scripts": [
+        "matches": ["https://www.gutenberg.org/files/*"],
+        "js": ["content_script.js"],
+        "run_at": "document_idle",
+        "all_frames": true
+    ],
 	"manifest_version": 2
 }
