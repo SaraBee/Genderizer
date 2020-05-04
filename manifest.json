@@ -2,5 +2,9 @@
 	"name": "Genderizer",
 	"version": "1.0",
 	"description": "Highlighting words since 2020",
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
 	"manifest_version": 2
 }
