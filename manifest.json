@@ -2,11 +2,14 @@
 	"name": "Genderizer",
 	"version": "1.0",
 	"description": "Highlighting words since 2020",
-    "content_scripts": [
-        "matches": ["https://www.gutenberg.org/files/*"],
+    "content_scripts": [{
+        "matches": ["*://www.gutenberg.org/*"],
         "js": ["content_script.js"],
         "run_at": "document_idle",
         "all_frames": true
-    ],
-	"manifest_version": 2
+    }],
+    "manifest_version": 2,
+    "web_accessible_resources": [
+        "lexicon/dictionary.json"
+    ]
 }
