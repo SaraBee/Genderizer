@@ -10,6 +10,7 @@
     }],
     "manifest_version": 2,
     "web_accessible_resources": [
-        "lexicon/dictionary.json"
+        "lexicon/german_dictionary.json",
+        "lexicon/spanish_dictionary.json"
     ]
 }

@@ -1,7 +1,13 @@
-var re = new RegExp('[A-ZÄÖÜ][a-zäöüß]+','g'); // German nouns
 var dict;
-url = chrome.runtime.getURL('lexicon/dictionary.json'); // load conditioning on if extension is enabled
-fetch(url).then(f => f.json()).then(j => {dict = j; run()}).catch(e => console.log(e));
+var GERMAN = "de";
+var SPANISH = "es";
+var supported_languages = [GERMAN, SPANISH];
+var dictionaries = {"de": "german_dictionary.json", "es": "spanish_dictionary.json"};
+var regexes = {
+	"de": new RegExp('[A-ZÄÖÜ][a-zäöüß]+','g'), // German nouns
+	"es": new RegExp('[A-ZÑÁÉÍÓÚÜa-zñáéíóúü]+', 'g'), // Spanish words (not just nouns)
+};
+run();
 
 function run() {
 	let htmlTag = document.getElementsByTagName("html").item(0);
@@ -31,9 +37,17 @@ function detectLanguage(inputText) {
   
 
 function colorize(language) {
-	if (language != "de") {
+	if (supported_languages.indexOf(language) < 0) {
 		return;
 	}
+	var dictionary = dictionaries[language];
+
+	url = chrome.runtime.getURL('lexicon/' + dictionary); // load conditioning on if extension is enabled
+	fetch(url).then(f => f.json()).then(j => {dict = j; walkAndReplace(language)}).catch(e => console.log(e));
+}
+
+function walkAndReplace(language) {
+	let re = regexes[language];
 	var walker = document.createTreeWalker(
 	document.body,
 	NodeFilter.SHOW_TEXT,
@@ -72,6 +86,9 @@ function wrapper(match) {
 				break;
 			case "Fem":
 				color = "red";
+				break;
+			case "MascFem":
+				color = "purple";
 				break;
 			case "Neut":
 				color = "green";
