@@ -1,6 +1,6 @@
 var re = new RegExp('[A-ZÄÖÜ][a-zäöüß]+','g'); // German nouns
 var dict;
-url = chrome.runtime.getURL('lexicon/dictionary.json'); // load conditioning on if extension is enabled
+url = chrome.runtime.getURL('lexicon/german_dictionary.json'); // load conditioning on if extension is enabled
 fetch(url).then(f => f.json()).then(j => {dict = j; run()}).catch(e => console.log(e));
 
 function run() {
