@@ -11,6 +11,7 @@
     "manifest_version": 2,
     "web_accessible_resources": [
         "lexicon/german_dictionary.json",
+	"lexicon/big_german_dictionary.json",
         "lexicon/spanish_dictionary.json"
     ]
 }

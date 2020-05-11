@@ -2,7 +2,7 @@ var dict;
 var GERMAN = "de";
 var SPANISH = "es";
 var supported_languages = [GERMAN, SPANISH];
-var dictionaries = {"de": "german_dictionary.json", "es": "spanish_dictionary.json"};
+var dictionaries = {"de": "big_german_dictionary.json", "es": "spanish_dictionary.json"};
 var regexes = {
 	"de": new RegExp('[A-ZÄÖÜ][a-zäöüß]+','g'), // German nouns
 	"es": new RegExp('[A-ZÑÁÉÍÓÚÜa-zñáéíóúü]+', 'g'), // Spanish words (not just nouns)
@@ -88,6 +88,7 @@ function wrapper(match) {
 				color = "red";
 				break;
 			case "MascFem":
+			case "Ambiguous":
 				color = "purple";
 				break;
 			case "Neut":
