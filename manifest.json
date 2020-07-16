@@ -2,16 +2,27 @@
 	"name": "Genderizer",
 	"version": "1.0",
 	"description": "Highlighting words since 2020",
-    "content_scripts": [{
-        "matches": ["*://www.gutenberg.org/*"],
-        "js": ["content_script.js"],
-        "run_at": "document_idle",
-        "all_frames": true
-    }],
-    "manifest_version": 2,
-    "web_accessible_resources": [
-        "lexicon/german_dictionary.json",
-	"lexicon/big_german_dictionary.json",
-        "lexicon/spanish_dictionary.json"
-    ]
+	"permissions": [
+		"storage"
+	],
+	"options_ui": {
+		"page": "popup.html",
+		"chrome_style": true
+	},
+	"content_scripts": [{
+		"matches": ["*://www.gutenberg.org/*"],
+		"js": ["content_script.js"],
+		"run_at": "document_idle",
+		"all_frames": true
+	}],
+	"manifest_version": 2,
+	"web_accessible_resources": [
+		"options.js",
+		"lexicon/german_dictionary.json",
+		"lexicon/big_german_dictionary.json",
+		"lexicon/spanish_dictionary.json"
+	],
+	"browser_action": {
+		"default_popup": "popup.html"
+	}
 }

@@ -4,9 +4,22 @@ var SPANISH = "es";
 var supported_languages = [GERMAN, SPANISH];
 var dictionaries = {"de": "big_german_dictionary.json", "es": "spanish_dictionary.json"};
 var regexes = {
-	"de": new RegExp('[A-ZÄÖÜ][a-zäöüß]+','g'), // German nouns
+	"de": new RegExp('[A-ZÄÖÜ][a-zäöüß]+|(<[^>]*>)','g'), // German nouns
 	"es": new RegExp('[A-ZÑÁÉÍÓÚÜa-zñáéíóúü]+', 'g'), // Spanish words (not just nouns)
 };
+
+var fcolor = "blue";
+var mcolor = "red";
+var ncolor = "green";
+var acolor = "purple";
+
+chrome.storage.sync.get(['femColor', 'mascColor', 'neutColor', 'ambColor'], function(result) {
+	fcolor = result.femColor;
+	mcolor = result.mascColor;
+	ncolor = result.neutColor;
+	acolor = result.ambColor;
+});
+
 run();
 
 function run() {
@@ -34,7 +47,6 @@ function detectLanguage(inputText) {
 		colorize(output.language);
 	});
   }
-  
 
 function colorize(language) {
 	if (supported_languages.indexOf(language) < 0) {
@@ -52,7 +64,7 @@ function walkAndReplace(language) {
 	document.body,
 	NodeFilter.SHOW_TEXT,
 	function(node) {
-		var matches = node.textContent.match(re); // later on: match based on language
+		var matches = node.textContent.match(re);
 
 		if (matches) {
 		return NodeFilter.FILTER_ACCEPT;
@@ -75,30 +87,85 @@ function walkAndReplace(language) {
 	}
 }
 
+function getSuffixGender(word) {
+	// If we've made it in here, the word isn't in the dictionary and we're checking for
+	// a suffix that predictably imparts gender
+
+	let suffixes = {
+		'a': 'Fem',
+		'anz': 'Fem',
+		'ei': 'Fem',
+		'enz': 'Fem',
+		'heit': 'Fem',
+		'ie': 'Fem',
+		'ik': 'Fem',
+		'in': 'Fem',
+		'keit': 'Fem',
+		'schaft': 'Fem',
+		'sion': 'Fem',
+		'tät': 'Fem',
+		'tion': 'Fem',
+		'ung': 'Fem',
+		'ur': 'Fem',
+		'ant': 'Masc',
+		'ast': 'Masc',
+		'ich': 'Masc',
+		'ig': 'Masc',
+		'ismus': 'Masc',
+		'ling': 'Masc',
+		'or': 'Masc',
+		'us': 'Masc',
+		'chen': 'Neut',
+		'lein': 'Neut',
+		'ma': 'Neut',
+		'ment': 'Neut',
+		'sel': 'Neut',
+		'tel': 'Neut',
+		'um': 'Neut'
+	};
+
+	word_ending = word.substring(word.length - 6);
+
+	while (word_ending.length > 0) {
+		if (word_ending in suffixes) {
+			return suffixes[word_ending];
+		}
+
+		word_ending = word_ending.substring(1)
+	}
+
+	// we still haven't found it! return ambiguous for now
+	return null;
+}
+
 function wrapper(match) {
 	//let wrapped_match = '<span style="color:blue">' + match + '</span>';
-	let color = "orange";
+	let color = "black";
+	let gender = null;
 	if (dict.hasOwnProperty(match)) {
-		console.log(`${match}: ${dict[match]}`);
-		switch (dict[match]) {
+		gender = dict[match];
+		switch (gender) {
 			case "Masc":
-				color = "blue";
+				color = mcolor;
 				break;
 			case "Fem":
-				color = "red";
+			case "Plur":
+				color = fcolor;
 				break;
 			case "MascFem":
 			case "Ambiguous":
-				color = "purple";
+				color = acolor;
 				break;
 			case "Neut":
-				color = "green";
+				color = ncolor;
 				break
 			default:
 				console.log("how did you get here?", match, dict[match]);
-				color = "pink";
+				color = "black";
 		}
+		console.log(`Dictionary match - ${match}: ${dict[match]}`);
+		return `<span style="color: ${color}">${match}</span>`;
 	}
-	return `<span style="color: ${color}">${match}</span>`;
+	return match
 }
 
