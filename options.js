@@ -21,6 +21,7 @@ function save_options() {
 	chrome.storage.sync.get(['femColor'], function(result) {
 	          console.log('Value currently is ' + result.femColor);
 	});
+	chrome.tabs.reload();
 }
 
 function restore_options() {
