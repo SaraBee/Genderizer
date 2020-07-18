@@ -1,27 +1,33 @@
 <html>
   <head>
     <title>Genderizer Popup</title>
+    <link href="style.css" rel="stylesheet" />
   </head>
-  <body style="min-width:180px;">
-    Choose your own colors:
-    <div>
-      <input type="color" id="fcolor" name="fcolor" value="#730000">
-      <label for="fcolor">Feminine</label>
+  <body>
+    <div style="margin:1em 0">
+      Choose your own colors:
     </div>
-    <div>
-      <input type="color" id="mcolor" name="mcolor" value="#000873">
-      <label for="mcolor">Masculine</label>
+    <div align="right">
+      <div class="color-option">
+        <label for="fcolor" style="margin:.5em">Feminine</label>
+        <input type="color" id="fcolor" name="fcolor" value="#730000">
+      </div>
+      <div class="color-option">
+        <label for="mcolor" style="margin:.5em">Masculine</label>
+        <input type="color" id="mcolor" name="mcolor" value="#000873">
+      </div>
+      <div class="color-option">
+        <label for="ncolor" style="margin:.5em">Neuter</label>
+        <input type="color" id="ncolor" name="ncolor" value="#125200">
+      </div>
+      <div class="color-option">
+        <label for="acolor" style="margin:.5em">Ambiguous</label>
+        <input type="color" id="acolor" name="acolor" value="#440052">
+      </div>
     </div>
-    <div>
-      <input type="color" id="ncolor" name="ncolor" value="#125200">
-      <label for="ncolor">Neuter</label>
+    <div align="center" class="button-container">
+      <button id="save" style="margin:0 0.5em;">Save</button><button id="reset" style="margin: 0 0.5em;">Reset</button>
+      <script src="options.js"></script>
     </div>
-    <div>
-      <input type="color" id="acolor" name="acolor" value="#440052">
-      <label for="acolor">Ambiguous</label>
-    </div>
-    <div id="status"></div>
-    <button id="save">Save</button>
-    <script src="options.js"></script>
   </body>
 </html>

@@ -1,4 +1,8 @@
-console.log("oh hello");
+const f_default = "#730000";
+const m_default = "#000873";
+const n_default = "#125200";
+const a_default = "#440052";
+
 // Saves options to chrome.storage
 function save_options() {
   var fcolor = document.getElementById('fcolor').value;
@@ -8,29 +12,30 @@ function save_options() {
   chrome.storage.sync.set({
     femColor: fcolor,
     mascColor: mcolor,
-	neutColor: ncolor,
-	ambColor: acolor
-  }, function() {
-    // Update status to let user know options were saved.
-    var status = document.getElementById('status');
-    status.textContent = 'Options saved.';
-    setTimeout(function() {
-      status.textContent = '';
-    }, 750);
+    neutColor: ncolor,
+    ambColor: acolor
   });
-	chrome.storage.sync.get(['femColor'], function(result) {
-	          console.log('Value currently is ' + result.femColor);
-	});
-	chrome.tabs.reload();
+  chrome.tabs.reload();
+}
+
+// Reset to some legible defaults
+function reset_options() {
+  chrome.storage.sync.set({
+    femColor: f_default,
+    mascColor: m_default,
+    neutColor: n_default,
+    ambColor: a_default
+  });
+  restore_options();
+  chrome.tabs.reload();
 }
 
 function restore_options() {
-  // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-    femColor: '#730000',
-    mascColor: '#000873',
-	neutColor: '#125200',
-	ambColor: '#440052'
+    femColor: f_default,
+    mascColor: m_default,
+    neutColor: n_default,
+    ambColor: a_default
   }, function(items) {
     document.getElementById('fcolor').value = items.femColor;
     document.getElementById('mcolor').value = items.mascColor;
@@ -38,6 +43,8 @@ function restore_options() {
     document.getElementById('acolor').value = items.ambColor;
   });
 }
+
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click',
     save_options);
+document.getElementById('reset').addEventListener('click', reset_options);
