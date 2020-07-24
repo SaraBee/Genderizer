@@ -1,17 +1,17 @@
-var dict;
-var GERMAN = "de";
-var SPANISH = "es";
-var supported_languages = [GERMAN, SPANISH];
-var dictionaries = {"de": "big_german_dictionary.json", "es": "spanish_dictionary.json"};
-var regexes = {
+let dict;
+const GERMAN = "de";
+const SPANISH = "es";
+const supported_languages = [GERMAN, SPANISH];
+const dictionaries = {"de": "german_dictionary.json", "es": "spanish_dictionary.json"};
+const regexes = {
 	"de": new RegExp('[A-ZÄÖÜ][a-zäöüß]+|(<[^>]*>)','g'), // German nouns
 	"es": new RegExp('[A-ZÑÁÉÍÓÚÜa-zñáéíóúü]+|(<[^>]*>)', 'g'), // Spanish words (not just nouns)
 };
 
-var fcolor = "blue";
-var mcolor = "red";
-var ncolor = "green";
-var acolor = "purple";
+let fcolor = "blue";
+let mcolor = "red";
+let ncolor = "green";
+let acolor = "purple";
 
 chrome.storage.sync.get(['femColor', 'mascColor', 'neutColor', 'ambColor'], function(result) {
 	fcolor = result.femColor;
@@ -34,94 +34,34 @@ function colorize(language) {
 	if (supported_languages.indexOf(language) < 0) {
 		return;
 	}
-	var dictionary = dictionaries[language];
 
-	url = chrome.runtime.getURL('lexicon/' + dictionary); // load conditioning on if extension is enabled
+	url = chrome.runtime.getURL('lexicon/' + dictionaries[language]);
 	fetch(url).then(f => f.json()).then(j => {dict = j; walkAndReplace(language)}).catch(e => console.log(e));
 }
 
 function walkAndReplace(language) {
-	let re = regexes[language];
-	var walker = document.createTreeWalker(
-	document.body,
-	NodeFilter.SHOW_TEXT,
-	function(node) {
-		var matches = node.textContent.match(re);
+	const re = regexes[language];
+	const walker = document.createTreeWalker(
+		document.body,
+		NodeFilter.SHOW_TEXT,
+		node => node.textContent.match(re) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP,
+		false
+	);
 
-		if (matches) {
-		return NodeFilter.FILTER_ACCEPT;
-		} else {
-		return NodeFilter.FILTER_SKIP;
-		}
-	},
-	false);
-
-	var nodes = [];
+	const nodes = [];
 
 	while (walker.nextNode()) {
-	nodes.push(walker.currentNode);
+		nodes.push(walker.currentNode);
 	}
 
-	for(var i = 0; node=nodes[i] ; i++) {
+	nodes.forEach(function(node) {
 		if (node.parentNode) {
 			node.parentNode.innerHTML = (node.parentNode.innerHTML.replace(re, wrapper))
 		}
-	}
-}
-
-function getSuffixGender(word) {
-	// If we've made it in here, the word isn't in the dictionary and we're checking for
-	// a suffix that predictably imparts gender
-
-	let suffixes = {
-		'a': 'Fem',
-		'anz': 'Fem',
-		'ei': 'Fem',
-		'enz': 'Fem',
-		'heit': 'Fem',
-		'ie': 'Fem',
-		'ik': 'Fem',
-		'in': 'Fem',
-		'keit': 'Fem',
-		'schaft': 'Fem',
-		'sion': 'Fem',
-		'tät': 'Fem',
-		'tion': 'Fem',
-		'ung': 'Fem',
-		'ur': 'Fem',
-		'ant': 'Masc',
-		'ast': 'Masc',
-		'ich': 'Masc',
-		'ig': 'Masc',
-		'ismus': 'Masc',
-		'ling': 'Masc',
-		'or': 'Masc',
-		'us': 'Masc',
-		'chen': 'Neut',
-		'lein': 'Neut',
-		'ma': 'Neut',
-		'ment': 'Neut',
-		'sel': 'Neut',
-		'tel': 'Neut',
-		'um': 'Neut'
-	};
-
-	word_ending = word.substring(word.length - 6);
-
-	while (word_ending.length > 0) {
-		if (word_ending in suffixes) {
-			return suffixes[word_ending];
-		}
-
-		word_ending = word_ending.substring(1)
-	}
-
-	// we still haven't found it! return ambiguous for now
-	return null;
+	});
 }
 
 function wrapper(match) {
-	//let wrapped_match = '<span style="color:blue">' + match + '</span>';
 	let color = "black";
 	let gender = null;
 	if (dict.hasOwnProperty(match)) {
@@ -142,10 +82,8 @@ function wrapper(match) {
 				color = ncolor;
 				break
 			default:
-				console.log("how did you get here?", match, dict[match]);
 				color = "black";
 		}
-		console.log(`Dictionary match - ${match}: ${dict[match]}`);
 		return `<span style="color: ${color}">${match}</span>`;
 	}
 	return match

@@ -12,7 +12,6 @@ toggle_element.querySelectorAll('span').forEach(x => {
 });
 
 function changeToggle(newValue) {
-  console.log(newValue);
   chrome.storage.sync.set({ext_active: newValue});
   chrome.tabs.reload();
 }
@@ -50,10 +49,6 @@ function saveOptions() {
   chrome.tabs.reload();
 }
 
-function setOptionsBackground() {
-
-}
-
 // Reset to some legible defaults
 function resetOptions() {
   chrome.storage.sync.set({
@@ -88,6 +83,5 @@ function restoreOptions() {
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
-document.getElementById('save').addEventListener('click',
-    saveOptions);
+document.getElementById('save').addEventListener('click', saveOptions);
 document.getElementById('reset').addEventListener('click', resetOptions);

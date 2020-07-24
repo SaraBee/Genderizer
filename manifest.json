@@ -1,14 +1,15 @@
 {
+	"manifest_version": 2,
 	"name": "Genderizer",
 	"version": "1.0",
 	"description": "Highlighting words since 2020",
-	"permissions": [
-		"storage",
-		"tabs"
-	],
-	"options_ui": {
-		"page": "popup.html",
-		"chrome_style": true
+	"icons": {
+		"16": "images/icon16.png",
+		"48": "images/icon48.png",
+		"128": "images/icon128.png"
+	},
+	"browser_action": {
+		"default_popup": "popup.html"
 	},
 	"content_scripts": [{
 		"matches": ["<all_urls>"],
@@ -16,17 +17,17 @@
 		"run_at": "document_idle",
 		"all_frames": true
 	}],
-	"manifest_version": 2,
+	"options_ui": {
+		"page": "popup.html",
+		"chrome_style": true
+	},
+	"permissions": [
+		"storage",
+		"tabs"
+	],
 	"web_accessible_resources": [
 		"options.js",
 		"lexicon/german_dictionary.json",
-		"lexicon/big_german_dictionary.json",
 		"lexicon/spanish_dictionary.json"
-	],
-	"browser_action": {
-		"default_popup": "popup.html"
-	},
-	"icons": { "16": "images/icon16.png",
-	           "48": "images/icon48.png",
-	          "128": "images/icon128.png" }
+	]
 }
