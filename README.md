@@ -23,7 +23,7 @@ it out:
 ## Use
 When Genderizer is on, it auto-detects the language of each page as it loads and will colorize if the text contains one of the languages Genderizer currently supports.
 
-![Genderizer UI screenshot]('/images/ui-screenshot.png')
+![Genderizer UI screenshot](/images/ui-screenshot.jpg)
 
 You can control Genderizer's behavior by clicking its icon in your browser. In
 this menu, you can toggle Genderizer on and off and select custom colors.
