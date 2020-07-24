@@ -4,29 +4,40 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <div style="margin:1em 0">
+    <div class="toggle-wrapper">
+      Toggle Genderizer:
+      <div id="ext-toggle" class="toggle">
+        <span data-value='off'>Off</span>
+        <span data-value='on'>On</span>
+      </div>
+    </div>
+    <hr />
+    <div>
       Choose your own colors:
     </div>
-    <div align="right">
-      <div class="color-option">
-        <label for="fcolor" style="margin:.5em">Feminine</label>
-        <input type="color" id="fcolor" name="fcolor" value="#730000">
-      </div>
-      <div class="color-option">
-        <label for="mcolor" style="margin:.5em">Masculine</label>
-        <input type="color" id="mcolor" name="mcolor" value="#000873">
-      </div>
-      <div class="color-option">
-        <label for="ncolor" style="margin:.5em">Neuter</label>
-        <input type="color" id="ncolor" name="ncolor" value="#125200">
-      </div>
-      <div class="color-option">
-        <label for="acolor" style="margin:.5em">Ambiguous</label>
-        <input type="color" id="acolor" name="acolor" value="#440052">
+    <div id="color-options-wrapper">
+      <div align="right">
+        <div class="color-option">
+          <label for="fcolor" id="fcolor-label" style="margin:.5em">Feminine</label>
+          <input type="color" id="fcolor" name="fcolor" value="#730000">
+        </div>
+        <div class="color-option">
+          <label for="mcolor" id = "mcolor-label" style="margin:.5em">Masculine</label>
+          <input type="color" id="mcolor" name="mcolor" value="#000873">
+        </div>
+        <div class="color-option">
+          <label for="ncolor" id = "ncolor-label" style="margin:.5em">Neuter</label>
+          <input type="color" id="ncolor" name="ncolor" value="#125200">
+        </div>
+        <div class="color-option">
+          <label for="acolor" id = "acolor-label" style="margin:.5em">Ambiguous</label>
+          <input type="color" id="acolor" name="acolor" value="#440052">
+        </div>
       </div>
     </div>
     <div align="center" class="button-container">
-      <button id="save" style="margin:0 0.5em;">Save</button><button id="reset" style="margin: 0 0.5em;">Reset</button>
+      <span id="reset" class="reset button" style="margin: 1 0.5em;">Reset</span>
+      <span id="save"  class="save button" style="margin:0 0.5em;">Save</span>
       <script src="options.js"></script>
     </div>
   </body>

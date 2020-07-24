@@ -3,14 +3,15 @@
 	"version": "1.0",
 	"description": "Highlighting words since 2020",
 	"permissions": [
-		"storage"
+		"storage",
+		"tabs"
 	],
 	"options_ui": {
 		"page": "popup.html",
 		"chrome_style": true
 	},
 	"content_scripts": [{
-		"matches": ["*://www.gutenberg.org/*"],
+		"matches": ["<all_urls>"],
 		"js": ["content_script.js"],
 		"run_at": "document_idle",
 		"all_frames": true
@@ -26,6 +27,6 @@
 		"default_popup": "popup.html"
 	},
 	"icons": { "16": "images/icon16.png",
-	           "48": "images/icon48.ico",
+	           "48": "images/icon48.png",
 	          "128": "images/icon128.png" }
 }

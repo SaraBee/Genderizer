@@ -5,16 +5,59 @@ body {
 	font-size: 90%
 }
 
-div.button-container {
-	margin: 1em 0 0 0;
-	display: inline-block;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-div.color-option {
+.color-option {
         margin:  0.5em;
 }
 
+.color-option>label, .color-option>input {
+	cursor: pointer;
+}
+
+.toggle-wrapper { margin:0.5em 0 0.5em; }
+
+.toggle {
+	margin: 0.5em;
+	display: flex;
+	flex-direction: row;
+	border: 1px solid black;
+	border-radius:3px;
+	background: #ADD4CC;
+	overflow: hidden;
+	user-select: none;
+	-webkit-user-select: none;
+}
+.toggle>span { flex-grow: 1; text-align: center; padding: 5px; cursor: pointer; }
+.toggle>span:not(:last-child) { border-right: 1px solid black; }
+.toggle>span:hover { background: #73A29D; }
+.toggle>span:active, .toggle .selected { background: #2c5655; color: #DEEBE7; }
+
+.button-container {
+	margin: 1em 0 0 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	user-select: none;
+	-webkit-user-select: none;
+}
+.button {
+	flex-grow: 1;
+	text-align: center;
+	vertical-align: middle;
+	padding: 5px;
+	border: 1px solid black;
+	border-radius:3px;
+	cursor: pointer;
+}
+
+.button:hover { background: #73A29D; }
+.button:active { background: #2c5655; color: #DEEBE7; }
+
+.reset {
+	background: #DEEBE7;
+}
+
+.save {
+	background: #ADD4CC;
+}

@@ -5,7 +5,7 @@ var supported_languages = [GERMAN, SPANISH];
 var dictionaries = {"de": "big_german_dictionary.json", "es": "spanish_dictionary.json"};
 var regexes = {
 	"de": new RegExp('[A-ZÄÖÜ][a-zäöüß]+|(<[^>]*>)','g'), // German nouns
-	"es": new RegExp('[A-ZÑÁÉÍÓÚÜa-zñáéíóúü]+', 'g'), // Spanish words (not just nouns)
+	"es": new RegExp('[A-ZÑÁÉÍÓÚÜa-zñáéíóúü]+|(<[^>]*>)', 'g'), // Spanish words (not just nouns)
 };
 
 var fcolor = "blue";
@@ -20,33 +20,15 @@ chrome.storage.sync.get(['femColor', 'mascColor', 'neutColor', 'ambColor'], func
 	acolor = result.ambColor;
 });
 
-run();
-
-function run() {
-	let htmlTag = document.getElementsByTagName("html").item(0);
-	let lang = htmlTag.getAttribute("lang"); // let's try checking what language the page claims it is first
-	if (lang != "" & lang != null) {
-		colorize(lang);
-	} else {
-		let paragraphs = document.getElementsByTagName("p");
-		let index = Math.round(paragraphs.length / 2); // grabbing a sample of text halfway down the page (hopefully)
-		let sample = paragraphs[index].textContent;
-		while (sample.length < 20) {
-			index++;
-			sample = paragraphs[index].textContent;
-		}
-		return detectLanguage(sample);
+chrome.storage.sync.get(['ext_active'], function(result) {
+	if (result.ext_active == 'on') {
+		chrome.i18n.detectLanguage(document.body.innerText, function(result) {
+			if (result.languages.length > 0) {
+				colorize(result.languages[0].language);
+			}
+		})
 	}
-
-}
-
-function detectLanguage(inputText) {
-	// wow cool, Chrome has built-in language detection!
-	chrome.i18n.detectLanguage(inputText, function(result) {
-		let output = result.languages[0];
-		colorize(output.language);
-	});
-  }
+});
 
 function colorize(language) {
 	if (supported_languages.indexOf(language) < 0) {
