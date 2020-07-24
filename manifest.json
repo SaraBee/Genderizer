@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Genderizer",
 	"version": "1.0",
-	"description": "Highlighting words since 2020",
+	"description": "Highlight German and Spanish nouns by gender",
 	"icons": {
 		"16": "images/icon16.png",
 		"48": "images/icon48.png",
@@ -22,8 +22,7 @@
 		"chrome_style": true
 	},
 	"permissions": [
-		"storage",
-		"tabs"
+		"storage"
 	],
 	"web_accessible_resources": [
 		"options.js",
