@@ -33,8 +33,7 @@ selections, while Reset will restore the original default colors.
 ## Credits and Thanks
 I created Genderizer during my time at the [Recurse
 Center](https://www.recurse.com/), a retreat for programmers. Thanks to
-[@pius](https://github.com/pius) and
-[@rolandcrosby](https://github.com/rolandcrosby) for the assists, and huge
+[@pius](https://github.com/pius), [@rolandcrosby](https://github.com/rolandcrosby), and [@JohnEarnest](https://github.com/JohnEarnest/) for the assists, and huge
 credit to [@lbernick](https://github.com/lbernick) for adding Spanish language
 support.
 
