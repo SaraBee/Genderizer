@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Genderizer",
-	"version": "1.0",
+	"version": "1.0.0",
 	"description": "Highlight German and Spanish nouns by gender",
 	"icons": {
 		"16": "images/icon16.png",
@@ -12,7 +12,7 @@
 		"default_popup": "popup.html"
 	},
 	"content_scripts": [{
-		"matches": ["<all_urls>"],
+		"matches": ["http://*/*", "https://*/*"],
 		"js": ["content_script.js"],
 		"run_at": "document_idle",
 		"all_frames": true
