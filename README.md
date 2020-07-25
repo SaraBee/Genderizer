@@ -54,7 +54,7 @@ That's a long way of saying: if the default colors aren't meaningful or
 helpful to you, pick new ones that are! The less work your brain has to do to
 tie together color and gender, the better.
 
-### I wish this supported `<insert_language_here>`, how can I help?
+### I wish this supported <insert_language_here>, how can I help?
 Genderizer can easily be extended to support other languages that make use of
 any or all of feminine, masculine, neuter, and ambiguous grammatical gender --
 all it takes is a word list! A word list should be a json object containing
