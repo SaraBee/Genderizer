@@ -2,14 +2,13 @@
 everything to do with the gender of **nouns**.*
 
 # Genderizer
-
-<img src="/images/app-screenshot.jpg" width="640"/>
-
 **Genderizer** is a Chrome extension that helps advanced language learners
 build stronger associations between nouns and their gender by color-coding
 them in the browser. It currently offers German and Spanish language support,
 and the colors are fully customizable to your preference and accessibility
 needs.
+
+<img src="/images/app-screenshot.jpg" width="640"/>
 
 ## Installation
 
