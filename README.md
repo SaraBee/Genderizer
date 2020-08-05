@@ -1,9 +1,9 @@
-Hey listen, this has nothing to do with the gender of **people** and
-everything to do with the gender of **nouns**.
-
-<img src="/images/app-screenshot.jpg" width="640"/>
+*Hey listen, this has nothing to do with the gender of **people** and
+everything to do with the gender of **nouns**.*
 
 # Genderizer
+
+<img src="/images/app-screenshot.jpg" width="640"/>
 
 **Genderizer** is a Chrome extension that helps advanced language learners
 build stronger associations between nouns and their gender by color-coding
@@ -13,14 +13,12 @@ needs.
 
 ## Installation
 
-Genderizer is not yet available in the Chrome Web Store, but you can still try
-it out:
-1. Download or clone this repo using the green Code button at the top of this
-   page
-2. Put your Chrome extensions in developer mode using the toggle at the upper
-   right of the extensions page
-3. Click on "Load unpacked" and point it at the directory where you put the
-   Genderizer repo
+Genderizer is [totes available in the Chrome Web Store](https://chrome.google.com/webstore/detail/genderizer/cogknegaliooejgocobjbinmkgfnaknn) now, go download it!
+
+If you want to hack on it locally: 
+1. Download or clone this repo using the green Code button at the top of this page
+2. Put your Chrome extensions in developer mode using the toggle at the upper right of the extensions page
+3. Click on "Load unpacked" and point it at the directory where you put the Genderizer repo
 
 ## Use
 When Genderizer is on, it auto-detects the language of each page as it loads and will colorize if the text contains one of the languages Genderizer currently supports.
